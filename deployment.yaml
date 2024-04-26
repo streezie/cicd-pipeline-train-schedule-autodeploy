@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: autodeploy_deployment 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: autodeploy 
+  template:
+    metadata:
+      labels:
+        app: autodeploy
+    spec:
+      containers:
+      - name: autodeploy 
+        image: streezie/autodeploy2 
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: autodeploy_service 
+spec:
+  type: NodePort
+  selector:
+    app: autodeploy 
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
