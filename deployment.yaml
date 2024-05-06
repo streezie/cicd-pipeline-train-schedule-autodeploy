@@ -27,7 +27,7 @@ spec:
   selector:
     app: autodeploy 
   ports:
-  - name: http
-    port: 80
+  - protocol: TCP
+    port: 8080
     targetPort: 9091
     nodePort:30110
